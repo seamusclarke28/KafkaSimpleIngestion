@@ -32,38 +32,39 @@ message invokes the actor.
 
 The actor plays around with the JSON, adding account ID, and then inserts the message into the DB. 
 The message format I have been using looks like 
+```
 { "metric": "sys.cpu.nice", "timestamp": 1437482234, "value": 18, "tags": { "host": "web01", "dc": "lga"}}
 
 The openTSDB is on http://sparkie02.aepona.com:10002. It is configured to automatically create a metric if it doesn't already exist. 
 
-{note}
 The code 
+```scala
 val context = play.api.libs.concurrent.Execution.Implicits.defaultContext
 
 and the 'builder' and 'client' lines that follow are required because we are not running this from inside a play container - we are running it from the command line. 
-{note}
+
 
 ## Usage
 
-* Build the project from sbt or Typesafe activator. 
-* Go into the project level directory 
-* sbt run
-* You will be given a number of options 
-** HelloAkkaJava
-** example.core.ConsumerStreamExample
-** example.core.HelloAkkaKafka
-** example.core.HelloAkkaScala
-* Choose example.core.HelloAkkaKafka
+1. Build the project from sbt or Typesafe activator. 
+2. Go into the project level directory 
+3. sbt run
+..* You will be given a number of options 
+..1. HelloAkkaJava
+..2. example.core.ConsumerStreamExample
+..3. example.core.HelloAkkaKafka
+..4. example.core.HelloAkkaScala
+4. Choose example.core.HelloAkkaKafka (3)
 
 That will start the app and it will listen for messages on the Kafka queue
 
 The easiest way to prime the Kafka queue is
-* Log into 10.10.24.130 (root/password) on another terminal
-* cd /data/kafka_2.10-0.8.2.1
-* bin/kafka-console-producer.sh --broker-list localhost:9092 --topic testTopic
-** This starts the producer waiting for messages
-* Enter a message, e.g.
-** { "metric": "sys.cpu.nice", "timestamp": 1437482234, "value": 18, "tags": { "host": "web01", "dc": "lga"}}
+1. Log into 10.10.24.130 (root/password) on another terminal
+2. cd /data/kafka_2.10-0.8.2.1
+3. bin/kafka-console-producer.sh --broker-list localhost:9092 --topic testTopic
+..* This starts the producer waiting for messages
+4. Enter a message, e.g.
+..* { "metric": "sys.cpu.nice", "timestamp": 1437482234, "value": 18, "tags": { "host": "web01", "dc": "lga"}}
 
 You will see output on the app terminal confirming whether the message is processed. 
 
