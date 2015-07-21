@@ -59,6 +59,7 @@ and the 'builder' and 'client' lines that follow are required because we are not
 That will start the app and it will listen for messages on the Kafka queue
 
 The easiest way to prime the Kafka queue is
+
 1. Log into 10.10.24.130 (root/password) on another terminal
 2. cd /data/kafka_2.10-0.8.2.1
 3. bin/kafka-console-producer.sh --broker-list localhost:9092 --topic testTopic
