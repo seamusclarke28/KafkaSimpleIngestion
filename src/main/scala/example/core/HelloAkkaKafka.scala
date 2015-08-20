@@ -108,7 +108,7 @@ object HelloAkkaKafka extends App {
 
   println(s"Starting the Kafka Consumer")
 
-  val topicNames = "testTopic"
+  val topicNames = "jsonTopic"
   val consumer = SingleTopicConsumer(topicNames)
 
   // consumer.read().foreach(println)
